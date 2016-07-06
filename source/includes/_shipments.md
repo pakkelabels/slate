@@ -2,7 +2,7 @@
 
 ## Create shipment
 ```php
-<?php 
+<?php
 $data = array(
  'shipping_agent' => 'pdk',
  'weight' => '1000',
@@ -48,11 +48,25 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 }
 ```
 
+> For some shipping agents, there can be an additional element called additional_data, which includes hipping agent specific data like below:
+
+```json
+{
+    "shipment_id": 42,
+    "order_id": 101,
+    "pkg_no": "JD014600003459067113",
+    "base64": "...",
+    "additiondal_data": {
+        "airway_bill_number": "4458467871"
+    }
+}
+```
+
 Create a shipment. The price of the shipment is automatically substracted from your balance. If the balance of the user is not enough, an error will be raised.
-Once the shipment has been created, the base64 encoding of the label is returned in **base64**. 	
+Once the shipment has been created, the base64 encoding of the label is returned in **base64**.
 
 <aside class="notice">
-When testing, set the paramter test to true. You can then create labels even if your balance is zero. 
+When testing, set the paramter test to true. You can then create labels even if your balance is zero.
 </aside>
 
 ### HTTP Request
@@ -66,7 +80,7 @@ Parameter | Type        | Required | Description
 token| string | true |Authentication token
 receiver_name|string|true|Receiver name
 receiver_attention|string|false|Receiver attention
-receiver_address1|string|true|Receiver address 1. For GLS shipments to "PakkeShop", this should contain the address of the PakkeShop and **not** the address of the receiver. 
+receiver_address1|string|true|Receiver address 1. For GLS shipments to "PakkeShop", this should contain the address of the PakkeShop and **not** the address of the receiver.
 receiver_address2|string|false|Receiver address 2. For GLS shipments to "PakkeShop", the format should be: Pakkeshop: xxxxx You can get the correct address 2 from the API call to gls_droppoints
 receiver_zipcode|string|true|Receiver zipcode
 receiver_city|string|true|Receiver city
@@ -101,7 +115,7 @@ test|boolean|false|If this is true, a test label will be generated. No money wil
 
 ## Create shipment own customer number
 ```php
-<?php 
+<?php
 $data = array(
  'shipping_agent' => 'pdk',
  'weight' => '1000',
@@ -147,6 +161,20 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 }
 ```
 
+> For some shipping agents, there can be an additional element called additional_data, which includes hipping agent specific data like below:
+
+```json
+{
+    "shipment_id": 42,
+    "order_id": 101,
+    "pkg_no": "JD014600003459067113",
+    "base64": "...",
+    "additiondal_data": {
+        "airway_bill_number": "4458467871"
+    }
+}
+```
+
 Create a shipment using your own customer number/contract from the shipping agent. In this way, you will pay directly to the corresponding shipping agent. The customer number will automatically be fetched from your account.
 Once the shipment has been created, the base64 encoding of the label is returned in base64.
 
@@ -165,7 +193,7 @@ Parameter | Type        | Required | Description
 token| string | true |Authentication token
 receiver_name|string|true|Receiver name
 receiver_attention|string|false|Receiver attention
-receiver_address1|string|true|Receiver address 1. For GLS shipments to "PakkeShop", this should contain the address of the PakkeShop and **not** the address of the receiver. 
+receiver_address1|string|true|Receiver address 1. For GLS shipments to "PakkeShop", this should contain the address of the PakkeShop and **not** the address of the receiver.
 receiver_address2|string|false|Receiver address 2. For GLS shipments to "PakkeShop", the format should be: Pakkeshop: xxxxx You can get the correct address 2 from the API call to gls_droppoints
 receiver_zipcode|string|true|Receiver zipcode
 receiver_city|string|true|Receiver city
@@ -201,7 +229,7 @@ test|boolean|false|If this is true, a test label will be generated. No money wil
 
 ## Create imported shipment
 ```php
-<?php 
+<?php
 $data = array(
  'shipping_agent' => 'pdk',
  'receiver_name' => 'John Doe',
@@ -263,7 +291,7 @@ token| string | true |Authentication token
 receiver_name|string|true|Receiver name
 receiver_attention|string|false|Receiver attention
 receiver_address1|string|true|Receiver address 1
-receiver_address2|string|false|Receiver address 2. 
+receiver_address2|string|false|Receiver address 2.
 receiver_zipcode|string|true|Receiver zipcode
 receiver_city|string|true|Receiver city
 receiver_country|string|true|Receiver country (e.g. DK)
@@ -325,7 +353,8 @@ print_r($labels);
 curl https://app.pakkelabels.dk/api/public/v2/shipments/shipments?token=8oH1hMoITVHdcPYiKAkgagVNEJ_UWFknVtfcTWB9&shipping_agent=pdk&receiver_country=DK
 ```
 
-> The above command returns JSON structured like this:
+> The above command returns JSON structured like below.
+> For some shipping agents, there can be an additional element called additional_data, which includes hipping agent specific data.
 
 ```json
 {
@@ -382,12 +411,16 @@ curl https://app.pakkelabels.dk/api/public/v2/shipments/shipments?token=8oH1hMoI
             "shipping_agent": "pdk",
             "created_at": "2014-11-13T13:37:42.195+01:00",
             "pkg_no": "00370720682192051392",
-            "order_id": "100"
+            "order_id": "100",
+            "additiondal_data": {
+                "airway_bill_number": "4458467871"
+            }
         },
         {...}
     ]
 }
 ```
+
 
 This method supports pagination. 20 shipments are returned on each page.
 The total number of shipments which matches the conditions is returned in **shipment_count**, and the total number of pages in **total_pages**.
@@ -672,8 +705,8 @@ curl https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates?token=8oH1
 }
 ```
 
-Returns the countries, shipping agents, products and services which are available for your user. The list also includes the price for the different products and services. 
-The IDs of the products should be used in **shipping_product_id**, and the IDs of the services in **services**, when creating a shipment. 
+Returns the countries, shipping agents, products and services which are available for your user. The list also includes the price for the different products and services.
+The IDs of the products should be used in **shipping_product_id**, and the IDs of the services in **services**, when creating a shipment.
 
 `GET https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates`
 
