@@ -95,13 +95,13 @@ sender_zipcode|string|true|Sender zipcode
 sender_city|string|true|Sender city
 sender_country|string|true|Sender country
 sender_email|string|false|Sender email
-custom_delivery|boolean|false|Specify if you want delivery to a custom droppoint. This only applies for Post Danmark shipments without delivery. If this is set to true, all fields starting with delivery_ must be set, as well as service_point_id. To find valid droppoints, use the API call pdk_droppoints. Defaults to **false**
-delivery_name|string|false|The name of the delivery point. Note that this is **NOT** the name of the person which will pick of the parcel. Use the field **company_name** from the API call **pdk_droppoints**
+custom_delivery|boolean|false|Specify if you want delivery to a custom droppoint. This only applies for Post Danmark and DAO shipments without delivery. If this is set to true, all fields starting with delivery_ must be set, as well as service_point_id. To find valid droppoints, use the API call **pdk_droppoints** or **dao_droppoints**. Defaults to **false**
+delivery_name|string|false|The name of the delivery point. Note that this is **NOT** the name of the person which will pick of the parcel. Use the field **company_name** from the API call **pdk_droppoints** if using Post Danmark / Post Nord or use **dao_droppoints** if using DAO
 delivery_address1|string|false|The address of the delivery point.
 delivery_zipcode|string|false|The zipcode of the delivery point.
 delivery_city|string|false|The city of the delivery point.
 delivery_country|string|false|country of the delivery point.
-service_point_id|integer|false|The ID of the service point. Use the field **number** from the API call **pdk_droppoints**. Note, this should only be used for Post Danmark shipments.
+service_point_id|integer|false|The ID of the service point. Use the field **number** from the API call **pdk_droppoints** if Post Danmark / PostNord is chosen or **dao_droppoints** if DAO is chosen. Note, this should only be used for Post Danmark or DAO shipments.
 shipping_agent|string|true|Shipping agent
 shipping_product_id|integer|true|The ID of shipping product to use. You can see which products are available to your user from the API call **freight_rates**
 services|string|false|A comma separated list of services to add to the product. You can see which services are available to your user from the API call **freight_rates**
@@ -208,13 +208,13 @@ sender_zipcode|string|true|Sender zipcode
 sender_city|string|true|Sender city
 sender_country|string|true|Sender country
 sender_email|string|false|Sender email
-custom_delivery|boolean|false|Specify if you want delivery to a custom droppoint. This only applies for Post Danmark shipments without delivery. If this is set to true, all fields starting with delivery_ must be set, as well as service_point_id. To find valid droppoints, use the API call pdk_droppoints. Defaults to **false**
-delivery_name|string|false|The name of the delivery point. Note that this is **NOT** the name of the person which will pick of the parcel. Use the field **company_name** from the API call **pdk_droppoints**
+custom_delivery|boolean|false|Specify if you want delivery to a custom droppoint. This only applies for Post Danmark and DAO shipments without delivery. If this is set to true, all fields starting with delivery_ must be set, as well as service_point_id. To find valid droppoints, use the API call **pdk_droppoints** or **dao_droppoints**. Defaults to **false**
+delivery_name|string|false|The name of the delivery point. Note that this is **NOT** the name of the person which will pick of the parcel. Use the field **company_name** from the API call **pdk_droppoints** if using Post Danmark / Post Nord or use **dao_droppoints** if using DAO
 delivery_address1|string|false|The address of the delivery point.
 delivery_zipcode|string|false|The zipcode of the delivery point.
 delivery_city|string|false|The city of the delivery point.
 delivery_country|string|false|country of the delivery point.
-service_point_id|integer|false|The ID of the service point. Use the field **number** from the API call **pdk_droppoints**. Note, this should only be used for Post Danmark shipments.
+service_point_id|integer|false|The ID of the service point. Use the field **number** from the API call **pdk_droppoints** if Post Danmark / PostNord is chosen or **dao_droppoints** if DAO is chosen. Note, this should only be used for Post Danmark or DAO shipments.
 shipping_agent|string|true|Shipping agent
 shipping_product_id|integer|true|The ID of shipping product to use. You can see which products are available to your user from the API call **freight_rates**
 services|string|false|A comma separated list of services to add to the product. You can see which services are available to your user from the API call **freight_rates**
@@ -824,3 +824,74 @@ token| string | true |Authentication token
 zipcode|string|true|Zipcode
 street|string|false|Street
 number|string|false|The number of droppoints to return (defaults to 3)
+
+## DAO Drop points
+```php
+<?php
+print_r($label->dao_droppoints(array('zipcode' => '5240', 'street' => 'Strandvejen')));
+?>
+```
+
+```shell
+curl https://app.pakkelabels.dk/api/public/v2/shipments/dao_droppoints?token=8oH1hMoITVHdcPYiKAkgagVNEJ_UWFknVtfcTWB9&zipcode=5240&street=Strandvejen
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+    {
+        "number": "58318",
+        "company_name": "Center Kiosken",
+        "address": "Vollsmose Alle 10",
+        "address2": "",
+        "zipcode": "5240",
+        "city": "Odense Nø",
+        "country": "DK",
+        "distance": 1915,
+        "longitude": 10.4413,
+        "latitude": 55.4068,
+        "agent": "dao"
+    },
+    {
+        "number": "59033",
+        "company_name": "Påskeløkkens Købmand",
+        "address": "Paaskeløkkevej 11",
+        "address2": "",
+        "zipcode": "5000",
+        "city": "Odense C",
+        "country": "DK",
+        "distance": 2385,
+        "longitude": 10.4159,
+        "latitude": 55.4086,
+        "agent": "dao"
+    },
+    {
+        "number": "58093",
+        "company_name": "Ok Plus Sandhusvej",
+        "address": "Sandhusvej 19",
+        "address2": "",
+        "zipcode": "5000",
+        "city": "Odense C",
+        "country": "DK",
+        "distance": 2466,
+        "longitude": 10.4047,
+        "latitude": 55.4177,
+        "agent": "dao"
+    }
+]
+```
+
+Find the nearest droppoint (“Service Point”) based on zipcode and address.
+
+`GET https://app.pakkelabels.dk/api/public/v2/shipments/dao_droppoints`
+
+### Query Parameters
+
+Parameter | Type        | Required | Description
+--------- | ----------- | ----------- | -----------
+token| string | true |Authentication token
+zipcode|string|true|Zipcode
+street|string|false|Street
+number|string|false|The number of droppoints to return (defaults to 3)
+country|string|false|Country (defaults to DK)
