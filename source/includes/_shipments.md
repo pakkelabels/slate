@@ -111,6 +111,7 @@ receipt|string|false|Specifies if you want a receipt send to your mail. Defaults
 label_format|string|false|Specify the format of the label (a5, 10x19 or zpl). Defaults to **a5**
 reference|string|false|Specify a custom text to be printed on the label. This can be used to display the order number or other useful information
 add_to_print_queue|string|false|If set to true, the newly created shipment is added to the printqueue
+delivery_instruction|string|false|Specify the delivery instruction that is transffered to shipping agent and visible label. Currently only available for PostNord / Post Danmark. Service ID 33 - Flexdelivery also needs to be used.
 test|boolean|false|If this is true, a test label will be generated. No money will be charges from your account. Defaults to **false**
 
 ## Create shipment own customer number
@@ -225,6 +226,7 @@ label_format|string|false|Specify the format of the label (a5, 10x19 or zpl). De
 reference|string|false|Specify a custom text to be printed on the label. This can be used to display the order number or other useful information
 add_to_print_queue|string|false|If set to true, the newly created shipment is added to the printqueue
 number_of_collis|string|false|Specifies the number of collis for this shipment. Defaults to 1
+delivery_instruction|string|false|Specify the delivery instruction that is transffered to shipping agent and visible label. Currently only available for PostNord / Post Danmark. Service ID 33 - Flexdelivery also needs to be used.
 test|boolean|false|If this is true, a test label will be generated. No money will be charges from your account. Defaults to **false**
 
 ## Create imported shipment
