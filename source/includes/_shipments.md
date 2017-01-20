@@ -201,7 +201,7 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
                     "weight":"10",
                     "volume":"0.006",
                     "running_meter":"",
-                    "packing":"PL4",
+                    "packing":"PL4"
                 }
             ]
         }
