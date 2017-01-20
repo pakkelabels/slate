@@ -102,7 +102,7 @@ delivery_zipcode|string|false|The zipcode of the delivery point.
 delivery_city|string|false|The city of the delivery point.
 delivery_country|string|false|country of the delivery point.
 service_point_id|integer|false|The ID of the service point. Use the field **number** from the API call **pdk_droppoints** if Post Danmark / PostNord is chosen or **dao_droppoints** if DAO is chosen. Note, this should only be used for Post Danmark or DAO shipments.
-shipping_agent|string|true|Shipping agent
+shipping_agent|string|true|Shipping agent. Currently supporting pdk, gls and dao.
 shipping_product_id|integer|true|The ID of shipping product to use. You can see which products are available to your user from the API call **freight_rates**
 services|string|false|A comma separated list of services to add to the product. You can see which services are available to your user from the API call **freight_rates**
 weight|integer|true|Specify the weight of the shipment. You can get a list of supported weights from the API call **freight_rates**.
@@ -176,6 +176,41 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 }
 ```
 
+> Example for the **extra** element
+
+```json
+{
+    "extra": {
+        "dfm":{  
+            "delivery_instruction":"The delivery instruction", // optional
+            "dot_type":"0", // DOT type for Danske Fragtmænd, send 0 as default. Other values D01, D02, D03 or D04
+            "insurance_amount":"10000", // Insurance Amount in DKK, optional
+            "insurance_type":"ZFA", // Insurance Type, optional
+            "pallets1":"0", // Pallet Exchange, quantity of whole pallet
+            "pallets2":"0", // Pallet Exchange, quantity of half pallet
+            "pallets4":"1", // Pallet Exchange, quantity of quart pallet
+            "pickup_date":"2017-01-13", 
+            "pickup_instruction":"The pickup instruction",
+            "goods":[  // Can contain more lines, not all fields are mandatory
+                {  
+                    "amount":"1", // Quantity of collis with same dimensions described in this line
+                    "content":"Test Content",
+                    "length":"30", //cm
+                    "width":"20", //cm
+                    "height":"10", //cm
+                    "weight":"10", //kg
+                    "volume":"0.006", //cubic meter
+                    "running_meter":"",
+                    "packing":"PL4", //Packing type
+                }
+            ]
+        }
+    }
+
+}
+```
+
+
 Create a shipment using your own customer number/contract from the shipping agent. In this way, you will pay directly to the corresponding shipping agent. The customer number will automatically be fetched from your account.
 Once the shipment has been created, the base64 encoding of the label is returned in base64.
 
@@ -216,7 +251,7 @@ delivery_zipcode|string|false|The zipcode of the delivery point.
 delivery_city|string|false|The city of the delivery point.
 delivery_country|string|false|country of the delivery point.
 service_point_id|integer|false|The ID of the service point. Use the field **number** from the API call **pdk_droppoints** if Post Danmark / PostNord is chosen or **dao_droppoints** if DAO is chosen. Note, this should only be used for Post Danmark or DAO shipments.
-shipping_agent|string|true|Shipping agent
+shipping_agent|string|true|Shipping agent. Currently supporting pdk, gls, dao, bring, dhl_express and dfm.
 shipping_product_id|integer|true|The ID of shipping product to use. You can see which products are available to your user from the API call **freight_rates**
 services|string|false|A comma separated list of services to add to the product. You can see which services are available to your user from the API call **freight_rates**
 weight|integer|true|Specify the weight of the shipment. You can get a list of supported weights from the API call **freight_rates**.
@@ -228,6 +263,8 @@ add_to_print_queue|string|false|If set to true, the newly created shipment is ad
 number_of_collis|string|false|Specifies the number of collis for this shipment. Defaults to 1
 delivery_instruction|string|false|Specify the delivery instruction that is transffered to shipping agent and visible label. Currently only available for PostNord / Post Danmark. Service ID 33 - Flexdelivery also needs to be used.
 test|boolean|false|If this is true, a test label will be generated. No money will be charges from your account. Defaults to **false**
+extra|object|false|This parameter can be used in order to send additional data
+
 
 ## Create imported shipment
 ```php
