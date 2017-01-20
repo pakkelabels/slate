@@ -182,26 +182,26 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 {
     "extra": {
         "dfm":{  
-            "delivery_instruction":"The delivery instruction", // optional
-            "dot_type":"0", // DOT type for Danske Fragtmænd, send 0 as default. Other values D01, D02, D03 or D04
-            "insurance_amount":"10000", // Insurance Amount in DKK, optional
-            "insurance_type":"ZFA", // Insurance Type, optional
-            "pallets1":"0", // Pallet Exchange, quantity of whole pallet
-            "pallets2":"0", // Pallet Exchange, quantity of half pallet
-            "pallets4":"1", // Pallet Exchange, quantity of quart pallet
+            "delivery_instruction":"The delivery instruction",
+            "dot_type":"0",
+            "insurance_amount":"10000",
+            "insurance_type":"ZFA",
+            "pallets1":"0",
+            "pallets2":"0",
+            "pallets4":"1",
             "pickup_date":"2017-01-13", 
             "pickup_instruction":"The pickup instruction",
-            "goods":[  // Can contain more lines, not all fields are mandatory
+            "goods":[
                 {  
-                    "amount":"1", // Quantity of collis with same dimensions described in this line
+                    "amount":"1",
                     "content":"Test Content",
-                    "length":"30", //cm
-                    "width":"20", //cm
-                    "height":"10", //cm
-                    "weight":"10", //kg
-                    "volume":"0.006", //cubic meter
+                    "length":"30",
+                    "width":"20", 
+                    "height":"10",
+                    "weight":"10",
+                    "volume":"0.006",
                     "running_meter":"",
-                    "packing":"PL4", //Packing type
+                    "packing":"PL4",
                 }
             ]
         }
@@ -210,6 +210,27 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 }
 ```
 
+```code
+"delivery_instruction": Optional
+"dot_type": DOT type for Danske Fragtmænd, send 0 as default. Other values D01, D02, D03 or D04
+"insurance_amount": Insurance Amount in DKK, optional
+"insurance_type": Insurance Type, optional
+"pallets1": Pallet Exchange, quantity of whole pallet
+"pallets2": Pallet Exchange, quantity of half pallet
+"pallets4": Pallet Exchange, quantity of quart pallet
+"pickup_date": Mandatory
+"pickup_instruction": "The pickup instruction",
+"goods": Can contain more lines, not all fields in goods line are mandatory.
+"amount": Quantity of collis with same dimensions described in this line
+"content": Description of contents
+"length": In CM
+"width": In CM
+"height": In CM
+"weight": In KG
+"volume": In cubic meter 
+"running_meter": Running Meter
+"packing": Packing type
+```
 
 Create a shipment using your own customer number/contract from the shipping agent. In this way, you will pay directly to the corresponding shipping agent. The customer number will automatically be fetched from your account.
 Once the shipment has been created, the base64 encoding of the label is returned in base64.
