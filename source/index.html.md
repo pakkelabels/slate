@@ -10,6 +10,7 @@ includes:
   - auth
   - users
   - shipments
+  - service_points
 
 search: true
 ---

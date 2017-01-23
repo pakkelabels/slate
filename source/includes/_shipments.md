@@ -777,7 +777,7 @@ Parameter | Type        | Required | Description
 token| string | true |Authentication token
 country|string|false|Filter by country
 
-## Post Denmark Drop points
+## PostNord Drop points
 ```php
 <?php
 print_r($label->pdk_droppoints(array('zipcode' => '5240', 'street' => 'Strandvejen')));
@@ -817,6 +817,8 @@ curl https://app.pakkelabels.dk/api/public/v2/shipments/pdk_droppoints?token=8oH
 ```
 
 Find the nearest droppoint (“Service Point”) based on zipcode and address.
+
+**It is possible to use the the universal pickup_points end-point that support more than one shipping agent**
 
 `GET https://app.pakkelabels.dk/api/public/v2/shipments/pdk_droppoints`
 
@@ -873,6 +875,8 @@ curl https://app.pakkelabels.dk/api/public/v2/shipments/gls_droppoints?token=8oH
 ```
 
 Find the nearest droppoint (“Service Point”) based on zipcode and address.
+
+**It is possible to use the the universal pickup_points end-point that support more than one shipping agent**
 
 `GET https://app.pakkelabels.dk/api/public/v2/shipments/gls_droppoints`
 
@@ -943,6 +947,8 @@ curl https://app.pakkelabels.dk/api/public/v2/shipments/dao_droppoints?token=8oH
 ```
 
 Find the nearest droppoint (“Service Point”) based on zipcode and address.
+
+**It is possible to use the the universal pickup_points end-point that support more than one shipping agent**
 
 `GET https://app.pakkelabels.dk/api/public/v2/shipments/dao_droppoints`
 
