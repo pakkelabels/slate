@@ -305,7 +305,9 @@ $data = array(
  'sender_city' => 'Odense C',
  'sender_country' => 'DK',
  'shipping_agent' => 'pdk',
- 'order_id' => '42'
+ 'order_id' => '42',
+ 'shipping_product_id' => 51,
+ 'shipping_product_services' => '11,12'
 );
 $shipment = $label->create_imported_shipment($data);
 print_r($shipment);
@@ -318,7 +320,7 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 &receiver_zipcode=5230&receiver_city=Odense M&receiver_country=DK\
 &receiver_email=test@test.dk&receiver_mobile=12345678\
 &sender_name=John Wayne&sender_address1=The Batcave 1&sender_zipcode=5000\
-&sender_city=Odense C&sender_country=DK&shipping_agent=pdk&order_id=42" https://app.pakkelabels.dk/api/public/v2/shipments/imported_shipment
+&sender_city=Odense C&sender_country=DK&shipping_agent=pdk&order_id=42&shipping_product_id=51&shipping_product_services=11,12" https://app.pakkelabels.dk/api/public/v2/shipments/imported_shipment
 ```
 
 > The above command returns JSON structured like this:
@@ -366,6 +368,8 @@ sender_country|string|true|Sender country
 sender_email|string|false|Sender email
 shipping_agent|string|false|Shipping agent
 order_id|string|false|Allows you to specify a custom order id to a shipment. This id has no functional impact, but is only for your own convenience
+shipping_product_id|integer|false|Shipping product ID. You can get the value from freight_rates call.
+shipping_product_services|string|false|IDs for shipping product services that you would like to use, e.g. "11,12". You can get the values from freight_rates call.
 
 ## Add to print queue
 ```php
