@@ -72,3 +72,4 @@ country | string | true | Country code. Available values: DK, NO, SE, FI, NL, DE
 zipcode | string | true | Zipcode
 address | string | false | Street address (contains street name and house number)
 number| integer | false | The number of droppoints to return (defaults to 10)
+id| string | false | The ID of the droppoint at shipping agent. Once this field is used, zipcode is no longer mandatory
