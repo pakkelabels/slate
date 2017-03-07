@@ -95,7 +95,7 @@ sender_zipcode|string|true|Sender zipcode
 sender_city|string|true|Sender city
 sender_country|string|true|Sender country
 sender_email|string|false|Sender email
-custom_delivery|boolean|false|Specify if you want delivery to a custom droppoint. This only applies for Post Danmark and DAO shipments without delivery. If this is set to true, all fields starting with delivery_ must be set, as well as service_point_id. To find valid droppoints, use the API call **pdk_droppoints** or **dao_droppoints**. Defaults to **false**
+custom_delivery|boolean|false|Specify if you want delivery to a custom droppoint. This only applies for Post Danmark and DAO shipments without delivery. If this is set to true, all fields starting with delivery_ must be set, as well as service_point_id. To find valid droppoints, use the API call **pickup_points**. Defaults to **false**
 delivery_name|string|false|The name of the delivery point. Note that this is **NOT** the name of the person which will pick of the parcel. Use the field **company_name** from the API call **pdk_droppoints** if using Post Danmark / Post Nord or use **dao_droppoints** if using DAO
 delivery_address1|string|false|The address of the delivery point.
 delivery_zipcode|string|false|The zipcode of the delivery point.
@@ -265,7 +265,7 @@ sender_zipcode|string|true|Sender zipcode
 sender_city|string|true|Sender city
 sender_country|string|true|Sender country
 sender_email|string|false|Sender email
-custom_delivery|boolean|false|Specify if you want delivery to a custom droppoint. This only applies for Post Danmark and DAO shipments without delivery. If this is set to true, all fields starting with delivery_ must be set, as well as service_point_id. To find valid droppoints, use the API call **pdk_droppoints** or **dao_droppoints**. Defaults to **false**
+custom_delivery|boolean|false|Specify if you want delivery to a custom droppoint. This only applies for Post Danmark and DAO shipments without delivery. If this is set to true, all fields starting with delivery_ must be set, as well as service_point_id. To find valid droppoints, use the API call **pickup_points**. Defaults to **false**
 delivery_name|string|false|The name of the delivery point. Note that this is **NOT** the name of the person which will pick of the parcel. Use the field **company_name** from the API call **pdk_droppoints** if using Post Danmark / Post Nord or use **dao_droppoints** if using DAO
 delivery_address1|string|false|The address of the delivery point.
 delivery_zipcode|string|false|The zipcode of the delivery point.
