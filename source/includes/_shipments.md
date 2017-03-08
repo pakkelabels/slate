@@ -367,6 +367,7 @@ sender_city|string|true|Sender city
 sender_country|string|true|Sender country
 sender_email|string|false|Sender email
 shipping_agent|string|false|Shipping agent
+service_point_id|string|false|Allows you to specify a service point / pick-up point where the shipment is being delivered through. The value must match with the value coming from "number" field when using pickip_points call.
 order_id|string|false|Allows you to specify a custom order id to a shipment. This id has no functional impact, but is only for your own convenience
 shipping_product_id|integer|false|Shipping product ID. You can get the value from freight_rates call.
 shipping_product_services|string|false|IDs for shipping product services that you would like to use, e.g. "11,12". You can get the values from freight_rates call.
