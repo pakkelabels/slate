@@ -80,8 +80,8 @@ Parameter | Type        | Required | Description
 token| string | true |Authentication token
 receiver_name|string|true|Receiver name
 receiver_attention|string|false|Receiver attention
-receiver_address1|string|true|Receiver address 1. For GLS shipments to "PakkeShop", this should contain the address of the PakkeShop and **not** the address of the receiver.
-receiver_address2|string|false|Receiver address 2. For GLS shipments to "PakkeShop", the format should be: Pakkeshop: xxxxx You can get the correct address 2 from the API call to gls_droppoints
+receiver_address1|string|true|Receiver address 1
+receiver_address2|string|false|Receiver address 2
 receiver_zipcode|string|true|Receiver zipcode
 receiver_city|string|true|Receiver city
 receiver_country|string|true|Receiver country (e.g. DK)
@@ -101,8 +101,8 @@ delivery_address1|string|false|The address of the delivery point.
 delivery_zipcode|string|false|The zipcode of the delivery point.
 delivery_city|string|false|The city of the delivery point.
 delivery_country|string|false|country of the delivery point.
-service_point_id|integer|false|The ID of the service point. Use the field **number** from the API call **pickup_points**. Note, this should only be used for Post Danmark or DAO shipments.
-shipping_agent|string|true|Shipping agent. Currently supporting pdk, gls and dao.
+service_point_id|integer|false|The ID of the service point. Use the field **number** from the API call **pickup_points**. Note, this should only be used for Bring, DAO, GLS and Post Danmark shipments when delivering through a service point. **For GLS shipments, if service_point_id is specified, the information of the service point will be filled out in fields for receiver according to GLS requirements.**
+shipping_agent|string|true|Shipping agent. Currently supporting pdk, gls, dao and bring.
 shipping_product_id|integer|true|The ID of shipping product to use. You can see which products are available to your user from the API call **freight_rates**
 services|string|false|A comma separated list of services to add to the product. You can see which services are available to your user from the API call **freight_rates**
 weight|integer|true|Specify the weight of the shipment. You can get a list of supported weights from the API call **freight_rates**.
