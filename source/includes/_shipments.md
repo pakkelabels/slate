@@ -79,7 +79,7 @@ Parameter | Type        | Required | Description
 --------- | ----------- | ----------- | -----------
 token| string | true |Authentication token
 receiver_name|string|true|Receiver name
-receiver_attention|string|false|Receiver attention
+receiver_attention|string|false|Receiver attention. This field is required when creating shipment to a business address.
 receiver_address1|string|true|Receiver address 1
 receiver_address2|string|false|Receiver address 2
 receiver_zipcode|string|true|Receiver zipcode
@@ -249,7 +249,7 @@ Parameter | Type        | Required | Description
 --------- | ----------- | ----------- | -----------
 token| string | true |Authentication token
 receiver_name|string|true|Receiver name
-receiver_attention|string|false|Receiver attention
+receiver_attention|string|false|Receiver attention. This field is required when creating shipment to a business address.
 receiver_address1|string|true|Receiver address 1
 receiver_address2|string|false|Receiver address 2
 receiver_zipcode|string|true|Receiver zipcode
@@ -351,7 +351,7 @@ Parameter | Type        | Required | Description
 --------- | ----------- | ----------- | -----------
 token| string | true |Authentication token
 receiver_name|string|true|Receiver name
-receiver_attention|string|false|Receiver attention
+receiver_attention|string|false|Receiver attention. This field is required when creating shipment to a business address.
 receiver_address1|string|true|Receiver address 1
 receiver_address2|string|false|Receiver address 2.
 receiver_zipcode|string|true|Receiver zipcode
@@ -701,23 +701,30 @@ curl https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates?token=8oH1
          "code":"pdk",
          "rates":[
             {
-               "from_weight":0,
-               "to_weight":1000,
-               "display_name":"0kg til 1kg",
-               "price":39.0,
-               "price_includes_vat":true
+                "from_weight": 0,
+                "to_weight": 1000,
+                "price": 58,
+                "price_including_vat": false,
+                "specific_shipping_product": 50
             },
             {
-               "from_weight":1000,
-               "to_weight":5000,
-               "display_name":"1kg til 5kg",
-               "price":49.0,
-               "price_includes_vat":true
+                "from_weight": 1000,
+                "to_weight": 5000,
+                "price": 68,
+                "price_including_vat": false,
+                "specific_shipping_product": 50
+            },
+            {
+                "from_weight": 0,
+                "to_weight": 1000,
+                "price": 39,
+                "price_including_vat": false,
+                "specific_shipping_product": 51
             }
          ],
          "products":[
             {
-               "id":517,
+               "id":51,
                "name":"Privatpakke u. omdeling",
                "price":0.0,
                "delivery":false,
@@ -735,7 +742,7 @@ curl https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates?token=8oH1
                ]
             },
             {
-               "id":516,
+               "id":50,
                "name":"Privatpakke m. omdeling",
                "price":19.0,
                "delivery":true,
@@ -771,7 +778,7 @@ curl https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates?token=8oH1
 ```
 
 Returns the countries, shipping agents, products and services which are available for your user. The list also includes the price for the different products and services.
-The IDs of the products should be used in **shipping_product_id**, and the IDs of the services in **services**, when creating a shipment.
+The IDs of the products should be used in **shipping_product_id**, and the IDs of the services in **services**, when creating a shipment. If the value for **specific_shipping_product** under a rate is set, then that rate only applies for the specific product.
 
 `GET https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates`
 
