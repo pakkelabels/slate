@@ -64,6 +64,7 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 
 Create a shipment. The price of the shipment is automatically substracted from your balance. If the balance of the user is not enough, an error will be raised.
 Once the shipment has been created, the base64 encoding of the label is returned in **base64**.
+When using test mode (test=true), it is only possible to test with either shipping_agent pdk or gls and receiver_country DK. The returned values are dummy and to illustrate the proof of concept.
 
 <aside class="notice">
 When testing, set the paramter test to true. You can then create labels even if your balance is zero.
@@ -233,7 +234,8 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 ```
 
 Create a shipment using your own customer number/contract from the shipping agent. In this way, you will pay directly to the corresponding shipping agent. The customer number will automatically be fetched from your account.
-Once the shipment has been created, the base64 encoding of the label is returned in base64.
+Once the shipment has been created, the base64 encoding of the label is returned in **base64**.
+When using test mode (test=true), it is only possible to test with either shipping_agent pdk or gls and receiver_country DK. The returned values are dummy and to illustrate the proof of concept.
 
 <aside class="notice">
 You need to contact us in order to set up the contract number
