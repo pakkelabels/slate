@@ -67,7 +67,7 @@ Find the nearest pickup points ("Service Point" or "Drop Point") based on shippi
 Parameter | Type        | Required | Description
 --------- | ----------- | ----------- | -----------
 token| string | true | Authentication token
-agent| string | true | Shipping Agent / Carrier code. Available values: bring, dao, gls and pdk
+agent| string | true | Shipping Agent / Carrier code. Available values: bring, dao, db_schenker_se, gls or pdk
 country | string | true | Country code. Available values: DK, NO, SE, FI, NL, DE, BE, LU. Default: DK
 zipcode | string | true | Zipcode
 address | string | false | Street address (contains street name and house number)
