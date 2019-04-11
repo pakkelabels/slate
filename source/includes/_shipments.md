@@ -695,7 +695,7 @@ id|integer|true|Shipment ID
 ```
 
 ```shell
-curl https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates?token=8oH1hMoITVHdcPYiKAkgagVNEJ_UWFknVtfcTWB9
+curl https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates?token=8oH1hMoITVHdcPYiKAkgagVNEJ_UWFknVtfcTWB9&country=DK
 ```
 
 > The above command returns JSON structured like this:
