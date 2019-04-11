@@ -183,7 +183,7 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 ```json
 {
     "extra": {
-        "dfm":{  
+        "dfm":{
             "delivery_instruction":"The delivery instruction",
             "dot_type":"0",
             "insurance_amount":"10000",
@@ -191,14 +191,14 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
             "pallets1":"0",
             "pallets2":"0",
             "pallets4":"1",
-            "pickup_date":"2017-01-13", 
+            "pickup_date":"2017-01-13",
             "pickup_instruction":"The pickup instruction",
             "goods":[
-                {  
+                {
                     "amount":"1",
                     "content":"Test Content",
                     "length":"30",
-                    "width":"20", 
+                    "width":"20",
                     "height":"10",
                     "weight":"10",
                     "volume":"0.006",
@@ -229,7 +229,7 @@ curl --data "token=BpLqF4fQtp4NLwp10dI-YvdF5LGIBkFE3GYuhq4M&shipping_agent=pdk\
 "width": In CM
 "height": In CM
 "weight": In KG
-"volume": In cubic meter 
+"volume": In cubic meter
 "running_meter": Running Meter
 "packing": Packing type
 ```
@@ -687,7 +687,10 @@ id|integer|true|Shipment ID
 ## Freigt Rates
 ```php
 <?php
-print_r($label->freight_rates());
+    $data = array(
+      'country' => 'DK',
+    );
+    print_r($label->freight_rates($data));
 ?>
 ```
 
@@ -791,7 +794,7 @@ The IDs of the products should be used in **shipping_product_id**, and the IDs o
 Parameter | Type        | Required | Description
 --------- | ----------- | ----------- | -----------
 token| string | true |Authentication token
-country|string|false|Filter by country
+country|string|true|Filter by country (defaults to DK)
 
 ## PostNord Drop points
 ```php
